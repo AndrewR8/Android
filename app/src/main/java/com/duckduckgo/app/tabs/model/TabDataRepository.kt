@@ -80,12 +80,16 @@ class TabDataRepository @Inject constructor(
                 return@scheduleDirect
             }
 
-            val lastTab = tabsDao.lastTab()
-            val position = if (lastTab == null) {
-                0
+            val tabs = tabsDao.tabs()
+
+            val addAfter = if (addToEnd) {
+                tabs.lastOrNull()
             } else {
-                lastTab.position + 1
+                tabsDao.selectedTab()
             }
+
+            val position = addAfter?.position?.inc() ?: tabs.size
+
             Timber.i("About to add a new tab, isDefaultTab: $isDefaultTab. $tabId, position: $position")
 
             tabsDao.addAndSelectTab(TabEntity(tabId, data.value?.url, data.value?.title, skipHome, true, position))

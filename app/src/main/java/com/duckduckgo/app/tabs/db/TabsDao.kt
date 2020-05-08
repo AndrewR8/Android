@@ -65,7 +65,7 @@ abstract class TabsDao {
     @Transaction
     open fun addAndSelectTab(tab: TabEntity) {
         deleteBlankTabs()
-        insertTab(tab)
+        insertTabAtPosition(tab)
         insertTabSelection(TabSelectionEntity(tabId = tab.tabId))
     }
 
