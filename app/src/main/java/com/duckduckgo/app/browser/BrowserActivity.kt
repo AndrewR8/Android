@@ -203,7 +203,7 @@ class BrowserActivity : DuckDuckGoActivity(), CoroutineScope by MainScope() {
         val sharedText = intent.intentText
         if (sharedText != null) {
             Timber.w("opening in new tab requested for $sharedText")
-            launch { viewModel.onOpenInNewTabRequested(sharedText, true) }
+            launch { viewModel.onOpenInNewTabRequested(sharedText, true, true) }
             return
         }
     }
@@ -281,7 +281,7 @@ class BrowserActivity : DuckDuckGoActivity(), CoroutineScope by MainScope() {
     }
 
     fun openInNewTab(query: String) {
-        launch { viewModel.onOpenInNewTabRequested(query) }
+        launch { viewModel.onOpenInNewTabRequested(query, isAddToEnd = false) }
     }
 
     fun openMessageInNewTab(message: Message) {

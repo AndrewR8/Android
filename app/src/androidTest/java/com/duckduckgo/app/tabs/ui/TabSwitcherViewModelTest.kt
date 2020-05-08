@@ -72,7 +72,7 @@ class TabSwitcherViewModelTest {
     @Test
     fun whenNewTabRequestedThenRepositoryNotifiedAndSwitcherClosed() = runBlocking<Unit> {
         testee.onNewTabRequested()
-        verify(mockTabRepository).add()
+        verify(mockTabRepository).add(addToEnd = true)
         verify(mockCommandObserver).onChanged(commandCaptor.capture())
         assertEquals(Command.Close, commandCaptor.lastValue)
     }

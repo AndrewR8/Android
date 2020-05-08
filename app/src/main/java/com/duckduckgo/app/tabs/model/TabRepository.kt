@@ -29,9 +29,15 @@ interface TabRepository {
     /**
      * @return tabId of new record
      */
-    suspend fun add(url: String? = null, skipHome: Boolean = false, isDefaultTab: Boolean = false): String
+    suspend fun add(url: String? = null, skipHome: Boolean = false, isDefaultTab: Boolean = false, addToEnd: Boolean = true): String
 
-    suspend fun add(tabId: String, data: MutableLiveData<Site>, skipHome: Boolean = false, isDefaultTab: Boolean = false)
+    suspend fun add(
+        tabId: String,
+        data: MutableLiveData<Site>,
+        skipHome: Boolean = false,
+        isDefaultTab: Boolean = false,
+        addToEnd: Boolean = true
+    )
 
     suspend fun addNewTabAfterExistingTab(url: String? = null, tabId: String)
 

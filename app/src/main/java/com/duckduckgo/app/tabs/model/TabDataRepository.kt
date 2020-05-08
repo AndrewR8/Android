@@ -46,9 +46,9 @@ class TabDataRepository @Inject constructor(
 
     private val siteData: LinkedHashMap<String, MutableLiveData<Site>> = LinkedHashMap()
 
-    override suspend fun add(url: String?, skipHome: Boolean, isDefaultTab: Boolean): String {
+    override suspend fun add(url: String?, skipHome: Boolean, isDefaultTab: Boolean, addToEnd: Boolean): String {
         val tabId = generateTabId()
-        add(tabId, buildSiteData(url), skipHome = skipHome, isDefaultTab = isDefaultTab)
+        add(tabId, buildSiteData(url), skipHome = skipHome, isDefaultTab = isDefaultTab, addToEnd = addToEnd)
         return tabId
     }
 
@@ -63,7 +63,13 @@ class TabDataRepository @Inject constructor(
         return data
     }
 
-    override suspend fun add(tabId: String, data: MutableLiveData<Site>, skipHome: Boolean, isDefaultTab: Boolean) {
+    override suspend fun add(
+        tabId: String,
+        data: MutableLiveData<Site>,
+        skipHome: Boolean,
+        isDefaultTab: Boolean,
+        addToEnd: Boolean
+    ) {
         siteData[tabId] = data
         databaseExecutor().scheduleDirect {
 

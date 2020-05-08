@@ -108,7 +108,7 @@ class BrowserViewModelTest {
     @Test
     fun whenOpenInNewTabRequestedThenTabAddedToRepository() = runBlocking<Unit> {
         val url = "http://example.com"
-        testee.onOpenInNewTabRequested(url)
+        testee.onOpenInNewTabRequested(url, isAddToEnd = false)
         verify(mockTabRepository).add(url)
     }
 

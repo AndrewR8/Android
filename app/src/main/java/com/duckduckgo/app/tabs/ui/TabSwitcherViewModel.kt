@@ -36,7 +36,7 @@ class TabSwitcherViewModel(private val tabRepository: TabRepository, private val
     }
 
     suspend fun onNewTabRequested() {
-        tabRepository.add()
+        tabRepository.add(addToEnd = true)
         command.value = Command.Close
     }
 
